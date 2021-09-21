@@ -3,6 +3,10 @@ from Text import colorText
 from wish import wish
 from binstar_client.inspect_package import r
 from numpy.lib.utils import source
+from GoogleNews import GoogleNews
+import nltk
+from textblob import TextBlob
+from newspaper import Article
 
 
 
@@ -20,7 +24,6 @@ apass = "nitesh"
 if inpass!=apass:
     lb.pyttsx3.speak("Incorrect Password Try Again ")
     exit()
-    print("Access Granted")
 lb.pyttsx3.speak("Access Granted")
 
 api = lb.pyttsx3.init('sapi5')#sapi5 is speech API developed by Microsoft, helps in synthesis and recognition of voice
@@ -125,11 +128,35 @@ if __name__=="__main__":
             ##driver = lb.webdriver.Chrome()
             index = query.lower().split().index('search')
             query = query.split()[index + 1:]
-            lb.driver.get("https://www.google.com/search?q =" + '+'.join(query))   
-            
-            
+            lb.driver.get("https://www.google.com/search?q =" + '+'.join(query))  
 
-
-
-        
-
+        ###################### NEWS #####################################        
+         
+        elif "news" in query:
+            speak('tell me on which topic do you want to hear ')
+            topic=takecommand()
+            googlenews = GoogleNews()
+            googlenews.set_lang('en')
+            googlenews.search(f"{topic}")
+            a=googlenews.results()
+            for i in a:
+                v=(i['link'])
+                break
+            url=f'{v}'
+            article=Article(url)
+            article.download()
+            article.parse()
+            article.nlp()
+            text=article.summary
+            print(text)
+            speak(text)
+            speak('Ending, the, news')
+            blob=TextBlob(text)
+            sentiment=blob.sentiment.polarity
+            speak("I think the news was")
+            if sentiment>0:
+                speak('positive')
+            elif sentiment==0:
+                speak('neutral')
+            else:
+                speak("negative")

@@ -36,12 +36,13 @@ def jokes():
     speak(pyjokes.get_joke())
     
 def Introduction():
-    speak("I am JARVIS 1.0 , AI assistant , "
-    "I am created by Piyush , "
-    "I can help you in various regards , "
-    "I can search for you on the Internet , "
-    "I can also grab definitions for you from wikipedia , "
-    "I am always happy to help you!, ")
+    speak("I am ATOM , AI assistant"
+          "Created by Nitesh,"
+          "I can help you in various regards,"
+          "I can search for you on the Internet,"
+          "I can also grab definitions for you from wikipedia,"
+          "I am always happy to help you!,")
+
     
 def takecommand():#It rakes microphone input from the user and returns string output
     r = lb.sr.Recognizer()

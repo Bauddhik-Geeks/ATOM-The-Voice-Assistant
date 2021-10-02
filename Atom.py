@@ -3,8 +3,7 @@ from Text import colorText
 from wish import wish
 from binstar_client.inspect_package import r
 from numpy.lib.utils import source
-
-
+import pyjokes #pip install pyjokes
 
 
 lb.os.system("cls")
@@ -32,7 +31,19 @@ api.setProperty('voice', voices[0].id)
 def speak(audio):
     api.say(audio)
     api.runAndWait()
-       
+    
+def jokes():
+    speak(pyjokes.get_joke())
+    
+def Introduction():
+    speak("I am ATOM , AI assistant"
+          "Created by Nitesh,"
+          "I can help you in various regards,"
+          "I can search for you on the Internet,"
+          "I can also grab definitions for you from wikipedia,"
+          "I am always happy to help you!,")
+
+    
 def takecommand():#It rakes microphone input from the user and returns string output
     r = lb.sr.Recognizer()
     with lb.sr.Microphone() as source:
@@ -125,7 +136,13 @@ if __name__=="__main__":
             ##driver = lb.webdriver.Chrome()
             index = query.lower().split().index('search')
             query = query.split()[index + 1:]
-            lb.driver.get("https://www.google.com/search?q =" + '+'.join(query))   
+            lb.driver.get("https://www.google.com/search?q =" + '+'.join(query)) 
+            
+        elif 'joke' in query:
+            jokes()
+            
+        elif 'tell me about yourself' and 'who are you' in query:
+            Introduction()
             
             
 

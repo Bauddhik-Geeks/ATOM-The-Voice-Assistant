@@ -138,6 +138,23 @@ if __name__=="__main__":
             query = query.split()[index + 1:]
             lb.driver.get("https://www.google.com/search?q =" + '+'.join(query)) 
             
+        ######################## Search Youtube ########################
+        
+        elif 'youtube' in query:    # Ask: Search for Avengers on Youtube
+            search_term = query.split('for')[-1].split('on')[0].strip()
+            url = f'https://www.youtube.com/results?search_query={search_term}'
+            lb.webbrowser.get().open(url)
+            lb.pyttsx3.speak(f'Here is what I found for {search_term} on youtube')
+        
+        ######################## Search Location ########################
+        
+        elif 'location' in query:   # Ask: Find location
+            lb.pyttsx3.speak('What is the location?')
+            location = takecommand()
+            url = 'https://google.nl/maps/place/' + location + '/&amp;'
+            lb.webbrowser.get().open(url)
+            lb.pyttsx3.speak('Here is the location for ' + location)
+            
         elif 'joke' in query:
             jokes()
             

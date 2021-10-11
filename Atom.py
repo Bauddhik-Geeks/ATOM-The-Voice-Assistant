@@ -3,6 +3,7 @@ from Text import colorText
 from wish import wish
 from binstar_client.inspect_package import r
 from numpy.lib.utils import source
+import datetime
 import pyjokes #pip install pyjokes
 
 
@@ -143,9 +144,29 @@ if __name__=="__main__":
             
         elif 'tell me about yourself' and 'who are you' in query:
             Introduction()
-            
-            
+        
+        ########################### NOTE #############################
 
+        elif "write a note" in query:
+            lb.pyttsx3.speak("What should i write, sir")
+            note = takecommand()
+            file = open('notes.txt', 'a')
+            lb.pyttsx3.speak("Sir, Should i include date and time")
+            snfm = takecommand()
+            if 'yes' in snfm or 'sure' in snfm:
+                strTime = str(datetime.datetime.now())
+                file.write(strTime)
+                file.write(" :- ")
+                file.write(f'{note}\n')
+                file.close()
+            else:
+                file.write(f'{note}\n') 
+                file.close()
+
+        elif "show note" in query:
+            lb.pyttsx3.speak("Showing notes on terminal.")
+            file = open("notes.txt", "r")
+            print(file.read())
 
 
         

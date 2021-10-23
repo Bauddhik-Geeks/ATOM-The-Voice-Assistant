@@ -225,3 +225,15 @@ if __name__ == "__main__":
                     lb.pyttsx3.speak('okay date set')
             else:
                 continue
+
+        ########################## Spotify ####################################
+        elif 'spotify' in query :    # Ask: play rapgod on Spotify
+            search_term = query.split('on')[0].strip()
+            search_term = search_term.split('play ')
+            search_term = search_term[1]
+            url = f'https://open.spotify.com/search/%7Bsearch_term%7D'
+            lb.webbrowser.get().open(url)
+            print(search_term)
+            lb.pyttsx3.speak(
+                f'Here is what I found for {search_term} on spotify')
+        
